@@ -12,10 +12,10 @@ COLLECTION_NAME="sensor"
 if __name__=="__main__":
     df = pd.read_csv(DATA_FILE_PATH)
     print(f"rows & columns: {df.shape}")
-
+    
     #convert dataframe to json so that we can dump data these record in mongo DB
     df.reset_index(drop =True, inplace = True)
-    json_record= json.loads(df.T.to_json())
+    json_record= list(json.loads(df.T.to_json()).values())
     print(json_record[0])
 
     #insert converted json to mongodb
